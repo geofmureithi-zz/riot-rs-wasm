@@ -1,0 +1,24 @@
+{
+  "name": "riot-rs-wasm",
+  "version": "0.0.1",
+  "description": "Riot-rs-wasm is a repository showing how to work between Riot [tiny js framework] and Rust allowing you to play with the magic of web assembly and bundlers",
+  "main": "index.js",
+  "author": "Njuguna Mureithi",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "parcel public/index.html --open",
+    "build": "parcel build public/index.html --out-dir=dist"
+  },
+  "devDependencies": {
+    "@riotjs/compiler": "^4.9.3",
+    "@riotjs/hot-reload": "^4.0.0",
+    "@riotjs/parcel-plugin-riot": "^4.0.1",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-cargo-web": "^0.3.1"
+  },
+  "dependencies": {
+    "@riotjs/route": "^5.2.0",
+    "riot": "^4.8.2"
+  }
+}

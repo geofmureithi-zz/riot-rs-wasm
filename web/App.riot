@@ -1,0 +1,26 @@
+
+
+<app>
+    <script>
+        import { add, state, increment, decrement} from '../Cargo.toml'
+
+        export default {
+            add(){
+                this.update(add(this.state, ...arguments))
+            },
+            increment(){
+                this.update(increment(this.state,...arguments))
+            },
+            decrement(){
+                this.update(decrement(this.state,...arguments))
+            },
+            onMounted(){
+                this.update(state())
+            }
+        }
+    </script>
+  <p>{ state.counter }</p>
+  <button onclick={() => add(2)}>Add 2</button>
+  <button onclick={increment}>Add +</button>
+  <button onclick={decrement}>Subtract -</button>
+</app>
