@@ -1,8 +1,7 @@
 macro_rules! export {
-    // `()` indicates that the macro takes no argument.
-    ($state_method_name:ident, $dispatch_method_name:ident, $state_name:ty, $action_name:ty, $dispatch:ident) => {
-        // The macro will expand into the contents of this block.
+    ($state_method_name:ident, $dispatch_method_name:ident, $dispatch:ident, $state_name:ty, $action_name:ty) => {
         use stdweb::js_export;
+
         js_serializable!($state_name);
         js_serializable!($action_name);
 

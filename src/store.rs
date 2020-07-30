@@ -14,7 +14,7 @@ use serde::{Serialize, Deserialize};
     }
 
 
-    pub fn reducer(state: State, action: Action) -> State {
+    pub fn store_reducer(state: State, action: Action) -> State {
         match action {
             Action::Increment => State {
                 counter: state.counter + 1
@@ -25,4 +25,4 @@ use serde::{Serialize, Deserialize};
         }
 }
 
-export!(store_state, store_dispatch, State, Action, reducer); 
+export!(store_state, store_dispatch, store_reducer, State, Action); 

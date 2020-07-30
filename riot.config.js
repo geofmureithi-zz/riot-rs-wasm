@@ -1,24 +1,32 @@
 const { registerPreprocessor } = require('@riotjs/compiler')
 const fs = require('fs');
 
-// register the pug preprocessor
+// register the rust preprocessor
 registerPreprocessor('javascript', 'rust', (code, options) => {
   const javascript = options.fragments.javascript
   const { attributes, text } = javascript
   const rustCode = text.text
   const module = attributes.find(a => a.name=='module').value
-  writeModuleToFile(module, rustCode)  
+  writeModuleToFile(module, rustCode)
+  const [_, state, dispatch, __, ___, actionEnum ] = rustCode.match(/export!\((\w+), (\w+), (\w+), (\w+), (\w+)\);/)
+  //const actions = rustCode.match(/enum (\w+) +{(((\n)?(.*?))+)}/)[2].trim().split(',').filter(x =>!!x).map(x => x.trim())
+  console.log(state, dispatch);
+  
   return {
     code : `
     import lib from '../Cargo.toml'
-    const state = lib.store_state
-    const dispatch = lib.store_dispatch
+    console.log(lib)
+    const state = lib.${state}
+    const dispatch = lib.${dispatch}
         export default {
             increment(){
-                this.update(dispatch(this.state, 'Increment'))
+                this.update(dispatch(this.state, 'increment'))
             },
             decrement(){
-                this.update(dispatch(this.state, 'Decrement'))
+                this.update(dispatch(this.state, 'decrement'))
+            },
+            double(){
+                this.update(dispatch(this.state, 'double'))
             },
             onMounted(){
                 this.update(state())

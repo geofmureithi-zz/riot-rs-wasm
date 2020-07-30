@@ -10,11 +10,11 @@
         #[derive(Serialize, Deserialize)]
         pub enum CounterAction {
             increment,
-            decrement
+            decrement,
             double,
         }
-
-        fn reducer(state: &CounterState, action: &CounterAction) -> CounterState {
+    
+        fn counter_reducer(state: CounterState, action: CounterAction) -> CounterState {
             match action {
                 CounterAction::increment => CounterState {
                     counter: state.counter + 1
@@ -27,14 +27,10 @@
                 }
             }
         }
-
-        pub fn dispatch(state: &CounterState, action: &CounterAction) -> &CounterState {
-            reducer(state, action)
-        }
-
-        export!(CounterState, CounterAction, dispatch)
+        export!(counter_state, counter_dispatch, counter_reducer, CounterState, CounterAction);
     </script>
   <p>{ state.counter }</p>
   <button onclick={increment}>Add +</button>
   <button onclick={decrement}>Subtract -</button>
+  <button onclick={double}>Double * 2</button>
 </app>

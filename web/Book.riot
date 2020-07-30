@@ -1,0 +1,36 @@
+<app>
+    <script type="rust" module="book">
+        use serde::{Serialize, Deserialize};
+
+        #[derive(Serialize, Deserialize, Default)]
+        pub struct BookState {
+            book: i32
+        }
+
+        #[derive(Serialize, Deserialize)]
+        pub enum BookAction {
+            increment,
+            decrement,
+            highlight,
+        }
+    
+        fn book_reducer(state: BookState, action: BookAction) -> BookState {
+            match action {
+                BookAction::increment => BookState {
+                    book: state.book + 1
+                },
+                BookAction::decrement => BookState {
+                    book: state.book - 1
+                },
+                BookAction::highlight => BookState {
+                    book: state.book * 4
+                }
+            }
+        }
+        export!(book_state, book_dispatch, book_reducer, BookState, BookAction);
+    </script>
+  <p>{ state.book }</p>
+  <button onclick={increment}>Add +</button>
+  <button onclick={decrement}>Subtract -</button>
+  <button onclick={highlight}>Double * 2 * 2</button>
+</app>
