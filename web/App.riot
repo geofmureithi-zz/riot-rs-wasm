@@ -1,26 +1,38 @@
 
 
 <app>
-    <script>
-        import { add, state, increment, decrement} from '../Cargo.toml'
+    <script type="rust">
+        use serde::{Serialize, Deserialize};
 
-        export default {
-            add(){
-                this.update(add(this.state, ...arguments))
-            },
-            increment(){
-                this.update(increment(this.state,...arguments))
-            },
-            decrement(){
-                this.update(decrement(this.state,...arguments))
-            },
-            onMounted(){
-                this.update(state())
+        #[derive(Serialize, Deserialize, Default)]
+        pub struct State {
+            counter: i32
+        }
+
+        #[derive(Serialize, Deserialize)]
+        pub enum Action {
+            increment,
+            decrement
+        }
+
+        pub fn reducer(state: &State, action: &Action) -> State {
+            match action {
+                Action::increment => State {
+                    counter: state.counter + 1
+                },
+                Action::decrement => State {
+                    counter: state.counter - 1
+                }
             }
         }
+
+        pub fn dispatch(state: &State, action: &Action) -> State {
+            reducer(state, action)
+        }
+
+        export!(State, Action, dispatch)
     </script>
   <p>{ state.counter }</p>
-  <button onclick={() => add(2)}>Add 2</button>
   <button onclick={increment}>Add +</button>
   <button onclick={decrement}>Subtract -</button>
 </app>
