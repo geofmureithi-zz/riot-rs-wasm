@@ -1,36 +1,38 @@
-
-
 <app>
-    <script type="rust">
+    <script type="rust" module="counter">
         use serde::{Serialize, Deserialize};
 
         #[derive(Serialize, Deserialize, Default)]
-        pub struct State {
+        pub struct CounterState {
             counter: i32
         }
 
         #[derive(Serialize, Deserialize)]
-        pub enum Action {
+        pub enum CounterAction {
             increment,
             decrement
+            double,
         }
 
-        pub fn reducer(state: &State, action: &Action) -> State {
+        fn reducer(state: &CounterState, action: &CounterAction) -> CounterState {
             match action {
-                Action::increment => State {
+                CounterAction::increment => CounterState {
                     counter: state.counter + 1
                 },
-                Action::decrement => State {
+                CounterAction::decrement => CounterState {
                     counter: state.counter - 1
+                },
+                CounterAction::double => CounterState {
+                    counter: state.counter * 2
                 }
             }
         }
 
-        pub fn dispatch(state: &State, action: &Action) -> State {
+        pub fn dispatch(state: &CounterState, action: &CounterAction) -> &CounterState {
             reducer(state, action)
         }
 
-        export!(State, Action, dispatch)
+        export!(CounterState, CounterAction, dispatch)
     </script>
   <p>{ state.counter }</p>
   <button onclick={increment}>Add +</button>
