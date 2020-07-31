@@ -1,7 +1,7 @@
 <app>
 <script type="rust" module="contact">
         use serde::{Serialize, Deserialize};
-        
+
         #[derive(Serialize, Deserialize, Default)]
         pub struct ContactState {
             name: String,
@@ -18,7 +18,7 @@
         fn contact_reducer(state: ContactState, action: ContactAction) -> ContactState {
             match action {
                 ContactAction::contact => {
-                    let message = format!("Hello {}! \n Your Email is: {}", &state.name, &state.email);
+                    let message = format!("Hello {}! \n Your Email is: {} \n This method is called from rust!!", &state.name, &state.email);
                     js! {
                         alert( @{message} );
                     };
@@ -33,11 +33,13 @@
 </script>
 
 <div class="flex flex-wrap">
+    
     <div class="w-full my-6 pr-0 lg:pr-2">
-        <p class="text-xl pb-6 flex items-center">
-            <i class="fas fa-list mr-3"></i> Contact Form
-        </p>
-        <pre>{ JSON.stringify(state, null, 4) }</pre>
+        <div class=" flex bg-gray-100 p-6 justify-center">
+            <div class="flex-1 md:text-2xl text-2xl font-bold">Contact Form</div> <span><a href="https://github.com/geofmureithi/riot-rs-wasm/blob/master/web/Contact.riot" alt="View code">View Code On Github</a></span>
+        </div>
+
+        <pre class="flex p-8 bg-white font-mono"><code>{ JSON.stringify(state, null, 4) }</code></pre>
         <div class="leading-loose">
             <form class="p-10 bg-white rounded shadow-xl" onsubmit={(e)=> { e.preventDefault(); contact()}}>
                 <div class="">

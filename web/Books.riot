@@ -1,7 +1,7 @@
 <app>
     <script type="rust" module="books">
         use serde::{Serialize, Deserialize};
-        
+
         #[derive(Serialize, Deserialize, Default)]
         pub struct Book {
             id: i32,
@@ -57,7 +57,7 @@
                             books.swap_remove(i);
                         }
                     }
-                    let message = format!("Book with id {} successfully deleted! ", id);
+                    let message = format!("Book with id {} successfully deleted! \n The code was books.swap_remove(i); ", id);
                     let result = js! {
                         alert( @{message} );
                     };
@@ -66,7 +66,7 @@
                     }
                 },
                 BooksAction::add_to_cart(id) => {
-                    let message = format!("Adding book with id {} to cart! ", id);
+                    let message = format!("Adding book with id {} to cart! \n Todo- Implement code in rust for add to cart ", id);
                     let result = js! {
                         alert( @{message} );
                     };
@@ -79,7 +79,7 @@
     <main class="my-8">
         <div class="container mx-auto px-6">
             <h3 class="text-gray-700 text-2xl font-medium">Books As a service</h3>
-            <span class="mt-3 text-sm text-gray-500">200+ Products</span>
+            <span class="mt-3 text-sm text-gray-500">200+ Products </span> | <a href="https://github.com/geofmureithi/riot-rs-wasm/blob/master/web/Books.riot" alt="View code">View Code On Github</a>
             <button class="float-right shadow-md font-medium mx-2 py-2 px-4 text-yellow-100
                 cursor-pointer bg-green-600 rounded text-lg tr-mt"onclick={() =>add({
                     id: Math.floor(Math.random() * 200),
