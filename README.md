@@ -11,7 +11,7 @@ You define the `.riot component` the way you want.
 Remember this is rust, so you can call any code as long as it meets the caveats of `std-web`.
 Lets start with the script part:
 
-````
+```javascript
 <script type="rust" module="counter">
 use serde::{
     Serialize,
@@ -45,7 +45,7 @@ fn counter_reducer(state: CounterState, action: CounterAction) - > CounterState 
 }
 export !(counter_state, counter_dispatch, counter_reducer, CounterState, CounterAction);
 </script>
-````
+```
 
 ### What is going on here?
 
@@ -57,7 +57,7 @@ export !(counter_state, counter_dispatch, counter_reducer, CounterState, Counter
 
 There is nothing unique apart from each action name in the `Action` enum is exposed to the component
 
-````
+```html
 <div class="flex bg-gray-100 py-24 justify-center">
         <div class="p-12 text-center max-w-2xl">
             <div class="md:text-3xl text-3xl font-bold">Your Counter is at { state.counter }</div>
@@ -70,7 +70,7 @@ There is nothing unique apart from each action name in the `Action` enum is expo
             </div>
         </div>
     </div>
-````
+```
 
 And thats it for now!
 
