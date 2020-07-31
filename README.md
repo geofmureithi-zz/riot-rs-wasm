@@ -5,7 +5,9 @@ Riot-rs-wasm is a repository showing how to work between Riot [tiny js framework
 ![Preview](https://github.com/geofmureithi/riot-rs-wasm/blob/master/public/images/counter.png?raw=true)
 
 ## Why?
-Because its posible HAHA!
+Play around with WebAssembly, Rust, Riot.js and TailwindCss
+
+See demo here >> https://riot-rs-wasm.vercel.app/
 
 ## How it works
 
