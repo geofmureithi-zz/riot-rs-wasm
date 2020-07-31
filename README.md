@@ -1,5 +1,7 @@
 # riot-rs-wasm
 Riot-rs-wasm is a repository showing how to work between Riot [tiny js framework] and Rust allowing you to play with the magic of web assembly and bundlers
+
+
 ![Preview](https://github.com/geofmureithi/riot-rs-wasm/blob/master/public/images/counter.png?raw=true)
 
 ## Why?
@@ -77,11 +79,11 @@ And thats it for now!
 
 ## TODO
 
-[-] Actions
-[ ] Component Lifecyle
-[ ] Custom riotjs plugin?
-[ ] Write tests?
-[ ] `create-riot-wasm-app`?
+    [-] - Actions
+    [ ] - Component Lifecyle
+    [ ] - Custom riotjs plugin?
+    [ ] - Write tests?
+    [ ] - `create-riot-wasm-app`?
 
 
 ## Contributions
