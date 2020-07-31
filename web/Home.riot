@@ -1,7 +1,12 @@
 <app>
 <script>
     import image from '../public/images/counter.png'
+    import lazy from '@riotjs/lazy'
+    import Loader from './Loader.riot'
     export default {
+        components: {
+            Counter: lazy(Loader, () => import('./Counter.riot'))
+        },
         image,
         examples: [
             {
@@ -43,6 +48,9 @@
             </div>
         </a>
       </div>
+    </div>
+    <div class="rounded-lg">
+        <counter/>
     </div>
     <div class="rounded-lg h-64 my-6 overflow-hidden">
         <img alt="content" class="object-cover object-start h-full w-full" src="{image}">

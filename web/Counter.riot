@@ -7,6 +7,7 @@
             counter: i32
         }
 
+        #[allow(non_camel_case_types)]
         #[derive(Serialize, Deserialize)]
         pub enum CounterAction {
             increment(i32),
@@ -27,7 +28,7 @@
                 }
             }
         }
-    export!(counter_state, counter_dispatch, counter_reducer, CounterState, CounterAction);
+        export!(counter_state, counter_dispatch, counter_reducer, CounterState, CounterAction);
     </script>
     <div class="flex bg-gray-100 py-24 justify-center">
         <div class="p-12 text-center max-w-2xl">
@@ -37,7 +38,7 @@
             <div class="mt-6 flex justify-center h-12 relative">
                 <button class=" shadow-md mx-2 font-medium py-2 px-4 text-green-100 cursor-pointer bg-green-600 rounded text-lg tr-mt" onclick={() => increment(1)}>Add +</button>
                 <button class=" shadow-md font-medium mx-2 py-2 px-4 text-red-100 cursor-pointer bg-green-600 rounded text-lg tr-mt " onclick={() => decrement(1)}>Subtract -</button>
-                <button class=" shadow-md font-medium mx-2 py-2 px-4 text-yellow-100cursor-pointer bg-green-600 rounded text-lg tr-mt" onclick={() => double()}>Double * 2</button>
+                <button class=" shadow-md font-medium mx-2 py-2 px-4 text-yellow-100 cursor-pointer bg-green-600 rounded text-lg tr-mt" onclick={() => double()}>Double * 2</button>
             </div>
         </div>
     </div>

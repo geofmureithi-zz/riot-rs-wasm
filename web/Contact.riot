@@ -1,14 +1,14 @@
 <app>
 <script type="rust" module="contact">
         use serde::{Serialize, Deserialize};
-
+        
         #[derive(Serialize, Deserialize, Default)]
         pub struct ContactState {
             name: String,
             email: String,
             message: String
         }
-
+        #[allow(non_camel_case_types)]
         #[derive(Serialize, Deserialize)]
         pub enum ContactAction {
             contact,
