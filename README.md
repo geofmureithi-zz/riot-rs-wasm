@@ -1,5 +1,7 @@
-# riot-rs-wasm
+# Riot.js with Wasm for state management
 Riot-rs-wasm is a repository showing how to work between Riot [tiny js framework] and Rust allowing you to play with the magic of web assembly and bundlers
+
+
 ![Preview](https://github.com/geofmureithi/riot-rs-wasm/blob/master/public/images/counter.png?raw=true)
 
 ## Why?
@@ -74,14 +76,25 @@ There is nothing unique apart from each action name in the `Action` enum is expo
 
 And thats it for now!
 
+## Example
+
+To run
+```
+$ yarn start
+```
+
+To build
+```
+$ yarn build
+```
 
 ## TODO
 
-[-] Actions
-[ ] Component Lifecyle
-[ ] Custom riotjs plugin?
-[ ] Write tests?
-[ ] `create-riot-wasm-app`?
+    [-] - Actions
+    [ ] - Component Lifecyle
+    [ ] - Custom riotjs plugin?
+    [ ] - Write tests?
+    [ ] - `create-riot-wasm-app`?
 
 
 ## Contributions
