@@ -1,38 +1,97 @@
 <app>
-    <script type="rust" module="counter">
-        use serde::{Serialize, Deserialize};
-        use serde_json::Value;
 
-        #[derive(Serialize, Deserialize, Default)]
-        pub struct CounterState {
-            counter: i32
-        }
+    <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
+        <div class="p-6">
+            <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Riot Wasm Admin</a>
+        </div>
+        <nav class="text-white text-base font-semibold pt-3">
+            <a href="/" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+                <i class="fas fa-tachometer-alt mr-3"></i>
+                Home
+            </a>
+            <a href="/books" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-sticky-note mr-3"></i>
+                Books
+            </a>
+            <a href="/counter" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-table mr-3"></i>
+                Counter
+            </a>
+            <a href="/form" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-align-left mr-3"></i>
+                Post
+            </a>
+        </nav>
+        <a href="#" class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
+            <i class="fas fa-arrow-circle-up mr-3"></i>
+            Uses Wasm + Riot
+        </a>
+    </aside>
+        <div class="relative w-full flex flex-col h-screen overflow-y-hidden">
+        <!-- Desktop Header -->
 
-        #[derive(Serialize, Deserialize)]
-        pub enum CounterAction {
-            increment,
-            decrement,
-            double,
-
-        }
+        
     
-        fn counter_reducer(state: CounterState, action: CounterAction) -> CounterState {
-            match action {
-                CounterAction::increment => CounterState {
-                    counter: state.counter + 1
-                },
-                CounterAction::decrement => CounterState {
-                    counter: state.counter - 1
-                },
-                CounterAction::double => CounterState {
-                    counter: state.counter * 2
-                }
-            }
-        }
-    export!(counter_state, counter_dispatch, counter_reducer, CounterState);
-    </script>
-  <p>{ state.counter }</p>
-  <button onclick={increment}>Add +</button>
-  <button onclick={decrement}>Subtract -</button>
-  <button onclick={double}>Double * 2</button>
+        <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+            <main class="w-full flex-grow p-6">
+                 <router>
+                    <route path='/'>
+                        <home/>
+                    </route>
+                    <route path='/books'>
+                        <books/>
+                    </route>
+                    <route path='/form'>
+                        <contact/>
+                    </route>
+                    <route path='/counter'>
+                        <counter/>
+                    </route>
+                </router>
+
+                <!-- Content goes here! 😁 -->
+            </main>
+    
+            <footer class="w-full bg-white text-right p-4">
+                Copyleft <a target="_blank" href="https://mureithi.me" class="underline">Njuguna Mureithi</a>.| Theme by <a target="_blank" href="https://davidgrzyb.com" class="underline">David Grzyb</a>.
+            </footer>
+        </div>
+        
+    </div>
+
+  <script>
+    import lazy from '@riotjs/lazy'
+    import { Router, Route } from '@riotjs/route'
+    import Loader from './Loader.riot'
+
+    export default {
+      components: {
+        Router,
+        Route,
+        Counter: lazy(Loader, () => import('./Counter.riot')),
+        Books: lazy(Loader, () => import('./Books.riot')),
+        Home: lazy(Loader, () => import('./Home.riot')),
+        Contact: lazy(Loader, ()=> import('./Contact.riot')),
+      },
+      
+    }
+  </script>
+
+  <style>
+    :host {
+      font-family: Helvetica Neue, Helvetica, Arial;
+    }
+
+    ul {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    ul li a {
+      padding: 16px;
+    }
+
+  </style>
 </app>
