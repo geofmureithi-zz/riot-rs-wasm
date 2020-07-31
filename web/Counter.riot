@@ -2,9 +2,17 @@
     <script type="rust" module="counter">
         use serde::{Serialize, Deserialize};
 
-        #[derive(Serialize, Deserialize, Default)]
+        #[derive(Serialize, Deserialize)]
         pub struct CounterState {
             counter: i32
+        }
+
+        impl Default for CounterState {
+            fn default() -> Self {
+                CounterState {
+                    counter: 42
+                }
+            }
         }
 
         #[allow(non_camel_case_types)]
@@ -30,8 +38,14 @@
         }
         export!(counter_state, counter_dispatch, counter_reducer, CounterState, CounterAction);
     </script>
-    <div class="flex bg-gray-100 py-24 justify-center">
-        <div class="p-12 text-center max-w-2xl">
+    <div class="flex flex-wrap">
+    
+    <div class="w-full my-6 pr-0 lg:pr-2">
+        <div class=" flex bg-gray-100 p-6 justify-center">
+            <div class="flex-1 md:text-2xl text-2xl font-bold">Counter</div> <span><a href="https://github.com/geofmureithi/riot-rs-wasm/blob/master/web/Counter.riot" alt="View code">View Code on Github</a></span>
+        </div>
+
+        <div class="p-12 text-center">
             <div class="md:text-3xl text-3xl font-bold">Your Counter is at { state.counter }</div>
             <div class="text-xl font-normal mt-4">Play around with
             </div>
