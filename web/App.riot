@@ -5,19 +5,19 @@
             <a href="/" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Riot Wasm</a>
         </div>
         <nav class="text-white text-base font-semibold pt-3">
-            <a href="/" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+            <a href="/" class="flex items-center text-white py-4 pl-6 nav-item">
                 <i class="fas fa-tachometer-alt mr-3"></i>
                 Home
             </a>
-            <a href="/books" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="/books" class="flex items-center text-white hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-sticky-note mr-3"></i>
                 Books
             </a>
-            <a href="/counter" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="/counter" class="flex items-center text-white  hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-table mr-3"></i>
                 Counter
             </a>
-            <a href="/form" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="/form" class="flex items-center text-white hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-align-left mr-3"></i>
                 Post
             </a>
@@ -29,7 +29,6 @@
         </a>
     </aside>
         <div class="relative w-full flex flex-col h-screen overflow-y-hidden">
-        <!-- Desktop Header -->
 
         
     
@@ -49,8 +48,6 @@
                         <books/>
                     </route>
                 </router>
-
-                <!-- Content goes here! 😁 -->
             </main>
     
             <footer class="w-full bg-white text-right p-4">
@@ -66,6 +63,9 @@
     import Loader from './Loader.riot'
 
     export default {
+      isActive(path){
+        return window.location.pathname == path
+      },
       components: {
         Router,
         Route,
