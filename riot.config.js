@@ -6,28 +6,20 @@ registerPreprocessor('javascript', 'rust', (code, options) => {
   const javascript = options.fragments.javascript
   const { attributes, text } = javascript
   const rustCode = text.text
-  const module = attributes.find(a => a.name=='module').value
-  writeModuleToFile(module, rustCode)
+  const module = attributes.find(a => a.name =='module').value
+  const nowWhitespaceRust = rustCode.replace(/\s/g,'')
   const [_, state, dispatch, __, ___, actionEnum ] = rustCode.match(/export!\((\w+), (\w+), (\w+), (\w+), (\w+)\);/)
-  //const actions = rustCode.match(/enum (\w+) +{(((\n)?(.*?))+)}/)[2].trim().split(',').filter(x =>!!x).map(x => x.trim())
-  console.log(state, dispatch);
-  
+  const actions = nowWhitespaceRust.replace(/\s/g,'').match(/enum(\w+\1){((\w+\2(\(\w+\))?,?)*)}/)[2].trim().split(',').map(z => z.split("(")[0]).filter(x =>!!x).map(x => x.trim())
+  writeModuleToFile(module, rustCode)
+  const actionsMethod = actions.map(action => `    ${action}(){  this.update(dispatch(this.state, arguments[0]?{ "${action}" : arguments[0] }: "${action}"))},`).join("\n")    
   return {
     code : `
     import lib from '../Cargo.toml'
-    console.log(lib)
     const state = lib.${state}
     const dispatch = lib.${dispatch}
+    console.log(lib)
         export default {
-            increment(){
-                this.update(dispatch(this.state, 'increment'))
-            },
-            decrement(){
-                this.update(dispatch(this.state, 'decrement'))
-            },
-            double(){
-                this.update(dispatch(this.state, 'double'))
-            },
+            ${actionsMethod}
             onMounted(){
                 this.update(state())
             }
@@ -36,8 +28,9 @@ registerPreprocessor('javascript', 'rust', (code, options) => {
   }
 })
 
+
 module.exports = {
-  javascript: 'rs'
+  javascript: 'rust'
 } 
 
 function writeModuleToFile(module, code) {

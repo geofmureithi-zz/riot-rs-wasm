@@ -1,6 +1,7 @@
 <app>
     <script type="rust" module="counter">
         use serde::{Serialize, Deserialize};
+        use serde_json::Value;
 
         #[derive(Serialize, Deserialize, Default)]
         pub struct CounterState {
@@ -12,6 +13,7 @@
             increment,
             decrement,
             double,
+
         }
     
         fn counter_reducer(state: CounterState, action: CounterAction) -> CounterState {
@@ -27,7 +29,7 @@
                 }
             }
         }
-        export!(counter_state, counter_dispatch, counter_reducer, CounterState, CounterAction);
+    export!(counter_state, counter_dispatch, counter_reducer, CounterState);
     </script>
   <p>{ state.counter }</p>
   <button onclick={increment}>Add +</button>

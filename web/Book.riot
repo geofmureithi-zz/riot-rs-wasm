@@ -3,34 +3,67 @@
         use serde::{Serialize, Deserialize};
 
         #[derive(Serialize, Deserialize, Default)]
-        pub struct BookState {
-            book: i32
+        pub struct Book {
+            id: i32,
+            title: String,
+            price: i32,
+            highlighted: bool, 
         }
 
+        #[derive(Serialize, Deserialize, Default)]
+        pub struct BooksState {
+            books: Vec<Book>
+        }
+
+        #[allow(non_camel_case_types)]
         #[derive(Serialize, Deserialize)]
-        pub enum BookAction {
-            increment,
-            decrement,
-            highlight,
+        pub enum BooksAction {
+            add(Book),
+            remove(i32),
+            highlight(i32),
         }
     
-        fn book_reducer(state: BookState, action: BookAction) -> BookState {
+        fn books_reducer(state: BooksState, action: BooksAction) -> BooksState {
             match action {
-                BookAction::increment => BookState {
-                    book: state.book + 1
+                BooksAction::add(book) => {
+                    let mut books = state.books;
+                    books.push(book);
+                    BooksState {
+                        books
+                    }
                 },
-                BookAction::decrement => BookState {
-                    book: state.book - 1
+                BooksAction::remove(id) => {
+                    let mut books = state.books;
+                    for i in (0..books.len()).rev() {
+                        if books[i].id == id {
+                            books.swap_remove(i);
+                        }
+                    }
+                    BooksState {
+                        books
+                    }
                 },
-                BookAction::highlight => BookState {
-                    book: state.book * 4
+                BooksAction::highlight(id) => {
+                    let books = state.books;
+                    let message = format!("Highilight {}!", id);
+                    let result = js! {
+                        alert( @{message} );
+                    };
+                    BooksState {
+                        books
+                    }
                 }
             }
         }
-        export!(book_state, book_dispatch, book_reducer, BookState, BookAction);
+        export!(books_state, books_dispatch, books_reducer, BooksState, BooksAction);
     </script>
-  <p>{ state.book }</p>
-  <button onclick={increment}>Add +</button>
-  <button onclick={decrement}>Subtract -</button>
-  <button onclick={highlight}>Double * 2 * 2</button>
+  <p>{ JSON.stringify(state.books) }</p>
+  <button onclick={() =>add({
+      id: 1,
+      title: "A grain of wheat by Ngugi wa Thiong'o",
+      price: 100.0,
+      highlighted:false
+  })}>Add +</button>
+  <button onclick={()=> remove(1)}>Remove -</button>
+  <button onclick={()=> highlight(1)}>Highilight</button>
 </app>
