@@ -1,6 +1,5 @@
 # Riot.js with Wasm for state management
-Riot-rs-wasm is a repository showing how to work between Riot [tiny js framework] and Rust allowing you to play with the magic of web assembly and bundlers
-
+riot-rs-wasm showcases how to work with Riot and Rust, letting you play with the magic of web assembly
 
 ![Preview](https://github.com/geofmureithi/riot-rs-wasm/blob/master/public/images/counter.png?raw=true)
 
