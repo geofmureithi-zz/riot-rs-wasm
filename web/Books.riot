@@ -1,5 +1,5 @@
 <app>
-    <script type="rust" module="book">
+    <script type="rust" module="books">
         use serde::{Serialize, Deserialize};
 
         #[derive(Serialize, Deserialize, Default)]
@@ -38,7 +38,7 @@
         pub enum BooksAction {
             add(Book),
             remove(i32),
-            add_to_cart(i32),
+            add_to_cart(i32)
         }
     
         fn books_reducer(state: BooksState, action: BooksAction) -> BooksState {
