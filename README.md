@@ -46,7 +46,7 @@ fn counter_reducer(state: CounterState, action: CounterAction) - > CounterState 
             }
     }
 }
-export !(counter_state, counter_dispatch, counter_reducer, CounterState, CounterAction);
+export!(counter_state, counter_dispatch, counter_reducer, CounterState, CounterAction);
 </script>
 ```
 
