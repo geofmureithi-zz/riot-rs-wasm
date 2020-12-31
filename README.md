@@ -1,4 +1,7 @@
 # Riot.js with Wasm for state management
+
+> This project is archived in favor of [Hirola](https://github.com/geofmureithi/hirola)
+
 riot-rs-wasm showcases how to work with Riot and Rust, letting you play with the magic of web assembly
 
 ![Preview](https://github.com/geofmureithi/riot-rs-wasm/blob/master/public/images/counter.png?raw=true)
